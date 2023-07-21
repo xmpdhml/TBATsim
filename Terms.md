@@ -22,9 +22,9 @@
 
 | Ternary | Decimal |
 | ------- | ------- |
+| T | -1 |
 | 0 | 0 |
 | 1 | 1 |
-| T | -1 |
 
 ## Unary negation
 
@@ -32,13 +32,14 @@ Unary negation (or complement) is an unary operator that inverts the value of a 
 
 | Input | Output |
 | ----- | ------ |
+| T | 1 |
 | 0 | 0 |
 | 1 | T |
-| T | 1 |
 
 ## Ternary and
 
 | Row & Col | T | 0 | 1 |
 | --------- | - | - | - |
 | T | T | T | T |
-|
+| 0 | T | 0 | 0 |
+| 1 | T | 0 | 1 |
