@@ -1,14 +1,21 @@
 #pragma once
 
+
+
 namespace TCore
 {
-    class trit
+    struct Trit
     {
+        private:
+        unsigned char data : 2;
     };
 
-    class tryte
+    struct Tryte
+    // 6-trit
     {
+        private:
+        unsigned short data : 12;
     };
 
-    class tr
+    //class T
 } // namespace TCore
