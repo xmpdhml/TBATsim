@@ -12,6 +12,4 @@ namespace Utilities
     {
     };
 
-    std::string ToString(TCore::Trit trit, bool allow_NaN = false);
-
 } // namespace Utilities
