@@ -1,8 +1,6 @@
 #pragma once
 
-
-
-namespace TCore
+namespace Ternary
 {
     struct Trit
     {
@@ -15,5 +13,4 @@ namespace TCore
         unsigned short data : 12;
     };
 
-    //class T
-} // namespace TCore
+} // namespace Ternary

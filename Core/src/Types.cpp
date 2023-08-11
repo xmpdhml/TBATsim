@@ -1,6 +1,6 @@
 #include <Types.h>
 
-namespace TCore
+namespace Ternary
 {
     
-} // namespace TCore
+} // namespace Ternary
