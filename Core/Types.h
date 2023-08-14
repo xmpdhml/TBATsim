@@ -23,8 +23,10 @@ namespace Ternary
     {
         unsigned short data : 12;
 
-        Tryte(short tryte);
+        Tryte(short tryte = 0);
         Tryte(const char* tryte);
+
+        friend std::ostream& operator<<(std::ostream& os, const Tryte& tryte);
 
         bool isNaN() const noexcept;
     };
