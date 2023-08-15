@@ -36,16 +36,16 @@ BOOST_AUTO_TEST_SUITE(Types_Tryte)
         BOOST_CHECK(t.data == 0);
 
         Tryte t2(1);
-        //BOOST_CHECK(t2.data == 0b000000000001);
+        BOOST_CHECK(t2.data == 0b000000000001);
         
         Tryte t3(2);
-        //BOOST_CHECK(t3.data == 0b000000000011);
+        BOOST_CHECK_EQUAL(t3.toString(), "1T");
 
         Tryte t4(-1);
-        //BOOST_CHECK_EQUAL(t4.data, 0b000000000010);
+        BOOST_CHECK_EQUAL(t4.toString(), "T");
 
         Tryte t5(27);
-        //BOOST_CHECK_EQUAL(t5.data, 0b000000010000);
+        BOOST_CHECK_EQUAL(t5.toString(), "1000");
         
     }
 

@@ -11,7 +11,8 @@ namespace Ternary
 
         Trit(char trit = 0);
 
-        friend std::ostream& operator<<(std::ostream& os, const Trit& trit);
+        std::string toString() const;
+
 
         bool operator==(const Trit& other) const noexcept;
 
@@ -26,9 +27,13 @@ namespace Ternary
         Tryte(short tryte = 0);
         Tryte(const char* tryte);
 
-        friend std::ostream& operator<<(std::ostream& os, const Tryte& tryte);
+        std::string toString() const;
 
         bool isNaN() const noexcept;
     };
+
+    std::ostream& operator<<(std::ostream& os, const Trit& trit);
+
+    std::ostream& operator<<(std::ostream& os, const Tryte& tryte);
 
 } // namespace Ternary

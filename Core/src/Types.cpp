@@ -23,20 +23,19 @@ namespace Ternary
         }
     }
 
-    std::ostream& operator<<(std::ostream& os, const Trit& trit)
+    std::string Trit::toString() const
     {
-        switch (trit.data)
+        switch (data)
         {
             case 0b00:
-                os << "0";
+                return "0";
             case 0b01:
-                os << "1";
+                return "1";
             case 0b10:
-                os << "T";
+                return "T";
             default:
-                os << "X";
+                return "X";
         }
-        return os;
     }
 
     bool Trit::operator== (const Trit& other) const noexcept
@@ -69,58 +68,63 @@ namespace Ternary
         }
 
         data = 0;
+        int shift = 0;
         while (tryte)
         {
             auto r = (tryte + 1) / 3;
             r = tryte - 3 * r;
-            data <<= 2;
             switch (r)
             {
                 case -1:
-                    data |= neg ? 0b01 : 0b10;
+                    data |= (neg ? 0b01 : 0b10) << shift;
+                    ++tryte;
                     break;
                 case 1:
-                    data |= neg ? 0b10 : 0b01;
+                    data |= (neg ? 0b10 : 0b01) << shift;
                     break;
                 case 0:
                     // data |= 0b00;
                     break;
             }
+            shift += 2;
             tryte /= 3;
         }
 
     }
-    
-    std::ostream& operator<<(std::ostream& os, const Tryte& trite)
+
+    std::string Tryte::toString() const
     {
+        char s[7];
         short mask = 0b110000000000;
+        char* p = s;
         bool hasPrinted = false;
         for (int i = 0; i < 6; ++i)
         {
-            switch ((trite.data & mask) >> (10 - 2 * i))
+            switch ((data & mask) >> (10 - 2 * i))
             {
                 case 0b00:
                     if (hasPrinted)
-                        os << "0";
+                        *p++ = '0';
                     break;
                 case 0b01:
-                    os << "1";
+                    *p++ = '1';
                     hasPrinted = true;
                     break;
                 case 0b10:
-                    os << "T";
+                    *p++ = 'T';
                     hasPrinted = true;
                     break;
                 default:
-                    os << "X";
+                    *p++ = 'X';
                     hasPrinted = true;
                     break;
             }
             mask >>= 2;
         }
         if (!hasPrinted)
-            os << "0";
-        return os;
+            *p++ = '0';
+        *p = '\0';
+        return std::string(s);
     }
 
     bool Tryte::isNaN() const noexcept
@@ -130,5 +134,12 @@ namespace Ternary
         r &= data & 0b010101010101;
         return r;
     }
+
+    std::ostream& operator<<(std::ostream& os, const Trit& trit)
+    { return os << trit.toString(); }
+
+    std::ostream& operator<<(std::ostream& os, const Tryte& tryte)
+    { return os << tryte.toString(); }
+
 
 } // namespace Ternary
