@@ -13,6 +13,7 @@ namespace Ternary
 
         std::string toString() const;
 
+        Trit operator-() const noexcept;
 
         bool operator==(const Trit& other) const noexcept;
 
@@ -26,6 +27,16 @@ namespace Ternary
 
         Tryte(short tryte = 0);
         Tryte(const char* tryte);
+
+        Tryte(const Tryte& other) = default;
+        Tryte(Tryte&& other) = default;
+        Tryte& operator=(const Tryte& other) = default;
+        Tryte& operator=(Tryte&& other) = default;
+
+        bool operator==(const Tryte& other) const noexcept
+        { return data == other.data; }
+
+        Tryte operator-() const noexcept;
 
         std::string toString() const;
 

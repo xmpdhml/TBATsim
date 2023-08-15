@@ -26,6 +26,14 @@ BOOST_AUTO_TEST_SUITE(Types_Trit)
         BOOST_CHECK(t1.isNaN());
     }
 
+    BOOST_AUTO_TEST_CASE(trit_neg)
+    {
+        Trit t1('0'), t2('1'), t3('T');
+        BOOST_CHECK_EQUAL(-t1, t1);
+        BOOST_CHECK_EQUAL(-t2, t3);
+        BOOST_CHECK_EQUAL(-t3, t2);
+    }
+
 BOOST_AUTO_TEST_SUITE_END()
 
 BOOST_AUTO_TEST_SUITE(Types_Tryte)
@@ -46,6 +54,12 @@ BOOST_AUTO_TEST_SUITE(Types_Tryte)
 
         Tryte t5(27);
         BOOST_CHECK_EQUAL(t5.toString(), "1000");
+
+        t = 5;
+        BOOST_CHECK_EQUAL(t.toString(), "1TT");
+
+        t = -5;
+        BOOST_CHECK_EQUAL(t.toString(), "T11");
         
     }
 
@@ -83,6 +97,15 @@ BOOST_AUTO_TEST_SUITE(Types_Tryte)
         t3.data = 0b110001100001;
         os << t3;
         BOOST_CHECK_EQUAL(os.str(), "X01T01");
+    }
+
+    BOOST_AUTO_TEST_CASE(tryte_neg)
+    {
+        Tryte t1(1), t2(-1), t3(2), t4(-2);
+        BOOST_CHECK_EQUAL(-t1, t2);
+        BOOST_CHECK_EQUAL(-t2, t1);
+        BOOST_CHECK_EQUAL(-t3, t4);
+        BOOST_CHECK_EQUAL(-t4, t3);
     }
 
 BOOST_AUTO_TEST_SUITE_END()

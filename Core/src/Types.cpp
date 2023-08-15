@@ -48,6 +48,13 @@ namespace Ternary
         return data == 0b11;
     }
 
+    Trit Trit::operator-() const noexcept
+    {
+        Trit t;
+        t.data = data ? ~data : 0;
+        return t;
+    }
+
     Tryte::Tryte(short tryte /* = 0 */)
     {
         if (tryte < -364 || tryte > 364)
@@ -133,6 +140,13 @@ namespace Ternary
         r >>= 1;
         r &= data & 0b010101010101;
         return r;
+    }
+
+    Tryte Tryte::operator-() const noexcept
+    {
+        Tryte t;
+        t.data = (data & 0b101010101010) >> 1 | (data & 0b010101010101) << 1;
+        return t;
     }
 
     std::ostream& operator<<(std::ostream& os, const Trit& trit)
