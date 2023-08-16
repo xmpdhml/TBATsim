@@ -2,7 +2,7 @@
 
 #include <exception>
 
-namespace Utilities
+namespace Ternary
 {
     class TException : public std::exception
     {
