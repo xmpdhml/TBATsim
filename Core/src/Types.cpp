@@ -23,7 +23,7 @@ namespace Ternary
         }
     }
 
-    std::string Trit::toString() const
+    std::string Trit::toString() const noexcept
     {
         switch (data)
         {
@@ -36,16 +36,6 @@ namespace Ternary
             default:
                 return "X";
         }
-    }
-
-    bool Trit::operator== (const Trit& other) const noexcept
-    {
-        return !isNaN() && (data == other.data);
-    }
-
-    bool Trit::isNaN() const noexcept
-    {
-        return data == 0b11;
     }
 
     Trit Trit::operator-() const noexcept
@@ -99,7 +89,7 @@ namespace Ternary
 
     }
 
-    std::string Tryte::toString() const
+    std::string Tryte::toString() const noexcept
     {
         char s[7];
         short mask = 0b110000000000;
@@ -132,14 +122,6 @@ namespace Ternary
             *p++ = '0';
         *p = '\0';
         return std::string(s);
-    }
-
-    bool Tryte::isNaN() const noexcept
-    {
-        auto r = data & 0b101010101010;
-        r >>= 1;
-        r &= data & 0b010101010101;
-        return r;
     }
 
     Tryte Tryte::operator-() const noexcept

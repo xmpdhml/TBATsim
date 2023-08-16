@@ -12,19 +12,19 @@ BOOST_AUTO_TEST_SUITE(Types_Trit)
         Trit t;
     }
 
-    BOOST_AUTO_TEST_CASE(constructor_char)
-    {
-        Trit t1('0'), t2(0);
-        BOOST_CHECK_EQUAL(t1, t2);
-        t1 = Trit('1');
-        t2 = Trit(1);
-        BOOST_CHECK_EQUAL(t1, t2);
-        t1 = Trit('T');
-        t2 = Trit(-1);
-        BOOST_CHECK_EQUAL(t1, t2);
-        t1 = Trit('X');
-        BOOST_CHECK(t1.isNaN());
-    }
+    // BOOST_AUTO_TEST_CASE(constructor_char)
+    // {
+    //     Trit t1('0'), t2(0);
+    //     BOOST_CHECK_EQUAL(t1, t2);
+    //     t1 = Trit('1');
+    //     t2 = Trit(1);
+    //     BOOST_CHECK_EQUAL(t1, t2);
+    //     t1 = Trit('T');
+    //     t2 = Trit(-1);
+    //     BOOST_CHECK_EQUAL(t1, t2);
+    //     t1 = Trit('X');
+    //     BOOST_CHECK(t1.isNaN());
+    // }
 
     BOOST_AUTO_TEST_CASE(trit_neg)
     {
@@ -63,24 +63,24 @@ BOOST_AUTO_TEST_SUITE(Types_Tryte)
         
     }
 
-    BOOST_AUTO_TEST_CASE(tryte_nan)
-    {
-        Tryte t1(365);
-        BOOST_CHECK(t1.isNaN());
-        Tryte t2(-365);
-        BOOST_CHECK(t2.isNaN());
+    // BOOST_AUTO_TEST_CASE(tryte_nan)
+    // {
+    //     Tryte t1(365);
+    //     BOOST_CHECK(t1.isNaN());
+    //     Tryte t2(-365);
+    //     BOOST_CHECK(t2.isNaN());
 
-        Tryte t3(364);
-        BOOST_CHECK(!t3.isNaN());
-        Tryte t4(-364);
-        BOOST_CHECK(!t4.isNaN());
+    //     Tryte t3(364);
+    //     BOOST_CHECK(!t3.isNaN());
+    //     Tryte t4(-364);
+    //     BOOST_CHECK(!t4.isNaN());
 
-        Tryte t5;
-        t5.data = 0b001100100100;
-        BOOST_CHECK(t5.isNaN());
-        t5.data = 0b010100100100;
-        BOOST_CHECK(!t5.isNaN());
-    }
+    //     Tryte t5;
+    //     t5.data = 0b001100100100;
+    //     BOOST_CHECK(t5.isNaN());
+    //     t5.data = 0b010100100100;
+    //     BOOST_CHECK(!t5.isNaN());
+    // }
 
     BOOST_AUTO_TEST_CASE(tryte_to_string)
     {

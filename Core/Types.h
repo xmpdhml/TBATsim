@@ -3,6 +3,8 @@
 #include <string>
 #include <ostream>
 
+#include <exceptions.h>
+
 namespace Ternary
 {
     struct Trit
@@ -11,13 +13,12 @@ namespace Ternary
 
         Trit(char trit = 0);
 
-        std::string toString() const;
+        std::string toString() const noexcept;
 
         Trit operator-() const noexcept;
 
-        bool operator==(const Trit& other) const noexcept;
-
-        bool isNaN() const noexcept;
+        bool operator==(const Trit& other) const noexcept
+        { return data == other.data; }
     };
 
     struct Tryte
@@ -38,9 +39,7 @@ namespace Ternary
 
         Tryte operator-() const noexcept;
 
-        std::string toString() const;
-
-        bool isNaN() const noexcept;
+        std::string toString() const noexcept;
     };
 
     std::ostream& operator<<(std::ostream& os, const Trit& trit);
