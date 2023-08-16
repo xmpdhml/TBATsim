@@ -2,6 +2,7 @@
 
 #include <string>
 #include <ostream>
+#include <compare>
 
 #include <exceptions.h>
 
@@ -13,12 +14,14 @@ namespace Ternary
 
         Trit(char trit = 0);
 
-        std::string toString() const noexcept;
+        std::string toString() const;
 
-        Trit operator-() const noexcept;
+        Trit operator-() const;
 
-        bool operator==(const Trit& other) const noexcept
-        { return data == other.data; }
+        std::weak_ordering operator<=>(const Trit& other) const;
+
+        bool operator==(const Trit& other) const
+        { return operator<=>(other) == std::weak_ordering::equivalent; }
     };
 
     struct Tryte
@@ -29,17 +32,14 @@ namespace Ternary
         Tryte(short tryte = 0);
         Tryte(const char* tryte);
 
-        Tryte(const Tryte& other) = default;
-        Tryte(Tryte&& other) = default;
-        Tryte& operator=(const Tryte& other) = default;
-        Tryte& operator=(Tryte&& other) = default;
+        Tryte operator-() const;
 
-        bool operator==(const Tryte& other) const noexcept
-        { return data == other.data; }
+        std::string toString() const;
 
-        Tryte operator-() const noexcept;
+        std::weak_ordering operator<=>(const Tryte& other) const;
 
-        std::string toString() const noexcept;
+        bool operator==(const Tryte& other) const
+        { return operator<=>(other) == std::weak_ordering::equivalent; }
     };
 
     std::ostream& operator<<(std::ostream& os, const Trit& trit);

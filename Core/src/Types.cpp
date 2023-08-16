@@ -19,11 +19,11 @@ namespace Ternary
                 data = 0b10;
                 break;
             default:
-                data = 0b11;
+                throw TException();
         }
     }
 
-    std::string Trit::toString() const noexcept
+    std::string Trit::toString() const
     {
         switch (data)
         {
@@ -34,15 +34,31 @@ namespace Ternary
             case 0b10:
                 return "T";
             default:
-                return "X";
+                throw TException();
         }
     }
 
-    Trit Trit::operator-() const noexcept
+    Trit Trit::operator-() const
     {
+        if (data == 0b11)
+            throw TException();
         Trit t;
         t.data = data ? ~data : 0;
         return t;
+    }
+
+    std::weak_ordering Trit::operator<=>(const Trit& other) const
+    {
+        if (data == 0b11 || other.data == 0b11)
+            throw TException();
+
+        static const std::weak_ordering table[3][3] = {
+            {std::weak_ordering::equivalent, std::weak_ordering::less, std::weak_ordering::greater},
+            {std::weak_ordering::greater, std::weak_ordering::equivalent, std::weak_ordering::greater},
+            {std::weak_ordering::less, std::weak_ordering::less, std::weak_ordering::equivalent}
+        };
+
+        return table[data][other.data];                    
     }
 
     Tryte::Tryte(short tryte /* = 0 */)
@@ -89,7 +105,7 @@ namespace Ternary
 
     }
 
-    std::string Tryte::toString() const noexcept
+    std::string Tryte::toString() const
     {
         char s[7];
         short mask = 0b110000000000;
@@ -112,9 +128,7 @@ namespace Ternary
                     hasPrinted = true;
                     break;
                 default:
-                    *p++ = 'X';
-                    hasPrinted = true;
-                    break;
+                    throw TException();
             }
             mask >>= 2;
         }
@@ -124,11 +138,31 @@ namespace Ternary
         return std::string(s);
     }
 
-    Tryte Tryte::operator-() const noexcept
+    Tryte Tryte::operator-() const
     {
+        if (((data & 0b101010101010) >> 1) & (data & 0b010101010101))
+            throw TException();
         Tryte t;
         t.data = (data & 0b101010101010) >> 1 | (data & 0b010101010101) << 1;
         return t;
+    }
+
+    std::weak_ordering Tryte::operator<=>(const Tryte& other) const
+    {
+        if (((data & 0b101010101010) >> 1) & (data & 0b010101010101))
+            throw TException();
+        if (((other.data & 0b101010101010) >> 1) & (other.data & 0b010101010101))
+            throw TException();
+
+        Trit t, o;
+        for (int i = 5; i > 0; --i)
+        {
+            t.data = (data & (0b11 << (2 * i))) >> (2 * i);
+            o.data = (other.data & (0b11 << (2 * i))) >> (2 * i);
+            if (t != o)
+                return t <=> o;
+        }
+        return t <=> o;
     }
 
     std::ostream& operator<<(std::ostream& os, const Trit& trit)

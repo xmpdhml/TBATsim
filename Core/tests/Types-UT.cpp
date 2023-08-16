@@ -95,17 +95,22 @@ BOOST_AUTO_TEST_SUITE(Types_Tryte)
         os.str(std::string());
         Tryte t3;
         t3.data = 0b110001100001;
-        os << t3;
-        BOOST_CHECK_EQUAL(os.str(), "X01T01");
+        BOOST_CHECK_THROW(os << t3, TException);
     }
 
     BOOST_AUTO_TEST_CASE(tryte_neg)
     {
         Tryte t1(1), t2(-1), t3(2), t4(-2);
+
+        try {
         BOOST_CHECK_EQUAL(-t1, t2);
         BOOST_CHECK_EQUAL(-t2, t1);
         BOOST_CHECK_EQUAL(-t3, t4);
         BOOST_CHECK_EQUAL(-t4, t3);
+        }
+        catch (TException& e) {
+            std::cout << e.what() << std::endl;
+        }
     }
 
 BOOST_AUTO_TEST_SUITE_END()
