@@ -61,6 +61,49 @@ namespace Ternary
         return table[data][other.data];                    
     }
 
+    Trit& Trit::operator&=(const Trit& other)
+    {
+        if (data == 0b11 || other.data == 0b11)
+            throw TException();
+        if (data == 0b10)
+            return *this;
+        if (other.data == 0b10)
+        {
+            data = 0b10;
+            return *this;
+        }
+        data &= other.data;
+        return *this;
+    }
+    Trit Trit::operator&(const Trit& other) const
+    {
+        Trit t(*this);
+        return t &= other;
+    }
+
+    Trit& Trit::operator|=(const Trit& other)
+    {
+        if (data == 0b11 || other.data == 0b11)
+            throw TException();
+        if (data == 0b01)
+            return *this;
+        if (other.data == 0b01)
+        {
+            data = 0b01;
+            return *this;
+        }
+        data &= other.data; // not a typo
+        return *this;
+    }
+    Trit Trit::operator|(const Trit& other) const
+    {
+        Trit t(*this);
+        return t |= other;
+    }
+
+
+
+
     Tryte::Tryte(short tryte /* = 0 */)
     {
         if (tryte < -364 || tryte > 364)

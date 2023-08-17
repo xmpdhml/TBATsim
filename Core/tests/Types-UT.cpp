@@ -48,6 +48,34 @@ BOOST_AUTO_TEST_SUITE(Types_Trit)
         BOOST_CHECK(t2 > t3);
     }
 
+    BOOST_AUTO_TEST_CASE(tritwise_and)
+    {
+        Trit t1('T'), t2('0'), t3('1');
+        BOOST_CHECK_EQUAL(t1 & t1, t1);
+        BOOST_CHECK_EQUAL(t1 & t2, t1);
+        BOOST_CHECK_EQUAL(t1 & t3, t1);
+        BOOST_CHECK_EQUAL(t2 & t1, t1);
+        BOOST_CHECK_EQUAL(t2 & t2, t2);
+        BOOST_CHECK_EQUAL(t2 & t3, t2);
+        BOOST_CHECK_EQUAL(t3 & t1, t1);
+        BOOST_CHECK_EQUAL(t3 & t2, t2);
+        BOOST_CHECK_EQUAL(t3 & t3, t3);
+    }
+
+    BOOST_AUTO_TEST_CASE(tritwise_or)
+    {
+        Trit t1('T'), t2('0'), t3('1');
+        BOOST_CHECK_EQUAL(t1 | t1, t1);
+        BOOST_CHECK_EQUAL(t1 | t2, t2);
+        BOOST_CHECK_EQUAL(t1 | t3, t3);
+        BOOST_CHECK_EQUAL(t2 | t1, t2);
+        BOOST_CHECK_EQUAL(t2 | t2, t2);
+        BOOST_CHECK_EQUAL(t2 | t3, t3);
+        BOOST_CHECK_EQUAL(t3 | t1, t3);
+        BOOST_CHECK_EQUAL(t3 | t2, t3);
+        BOOST_CHECK_EQUAL(t3 | t3, t3);
+    }
+
 BOOST_AUTO_TEST_SUITE_END()
 
 BOOST_AUTO_TEST_SUITE(Types_Tryte)

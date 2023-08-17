@@ -22,6 +22,17 @@ namespace Ternary
 
         bool operator==(const Trit& other) const
         { return operator<=>(other) == std::weak_ordering::equivalent; }
+
+        // tritwise operators
+        Trit& operator&=(const Trit& other);
+        Trit& operator|=(const Trit& other);
+        Trit& operator^=(const Trit& other);
+        
+        Trit operator&(const Trit& other) const;
+        Trit operator|(const Trit& other) const;
+        Trit operator^(const Trit& other) const;
+        Trit operator~() const;
+
     };
 
     struct Tryte
