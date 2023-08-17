@@ -34,6 +34,20 @@ BOOST_AUTO_TEST_SUITE(Types_Trit)
         BOOST_CHECK_EQUAL(-t3, t2);
     }
 
+    BOOST_AUTO_TEST_CASE(trit_comparison)
+    {
+        Trit t1('0'), t2('1'), t3('T');
+        BOOST_CHECK(t1 == t1);
+        BOOST_CHECK(t2 == t2);
+        BOOST_CHECK(t3 == t3);
+        BOOST_CHECK(t1 != t2);
+        BOOST_CHECK(t1 != t3);
+        BOOST_CHECK(t2 != t3);
+        BOOST_CHECK(t1 < t2);
+        BOOST_CHECK(t1 > t3);
+        BOOST_CHECK(t2 > t3);
+    }
+
 BOOST_AUTO_TEST_SUITE_END()
 
 BOOST_AUTO_TEST_SUITE(Types_Tryte)
@@ -50,6 +64,7 @@ BOOST_AUTO_TEST_SUITE(Types_Tryte)
         BOOST_CHECK_EQUAL(t3.toString(), "1T");
 
         Tryte t4(-1);
+        BOOST_CHECK_EQUAL(t4.data, 0b000000000010);
         BOOST_CHECK_EQUAL(t4.toString(), "T");
 
         Tryte t5(27);
@@ -111,6 +126,58 @@ BOOST_AUTO_TEST_SUITE(Types_Tryte)
         catch (TException& e) {
             std::cout << e.what() << std::endl;
         }
+    }
+
+    BOOST_AUTO_TEST_CASE(tryte_comparison)
+    {
+        Tryte t1(1), t2(-1), t3(2), t4(-2), t5(3), t6(-3);
+
+        BOOST_CHECK(t1 == t1);
+        BOOST_CHECK(t2 == t2);
+        BOOST_CHECK(t3 == t3);
+        BOOST_CHECK(t4 == t4);
+        BOOST_CHECK(t5 == t5);
+        BOOST_CHECK(t6 == t6);
+
+        BOOST_CHECK(t1 != t2);
+        BOOST_CHECK(t1 != t3);
+        BOOST_CHECK(t1 != t4);
+        BOOST_CHECK(t1 != t5);
+        BOOST_CHECK(t1 != t6);
+
+        BOOST_CHECK(t2 != t3);
+        BOOST_CHECK(t2 != t4);
+        BOOST_CHECK(t2 != t5);
+        BOOST_CHECK(t2 != t6);
+
+        BOOST_CHECK(t3 != t4);
+        BOOST_CHECK(t3 != t5);
+        BOOST_CHECK(t3 != t6);
+
+        BOOST_CHECK(t4 != t5);
+        BOOST_CHECK(t4 != t6);
+
+        BOOST_CHECK(t5 != t6);
+
+        BOOST_CHECK(t1 > t2);
+        BOOST_CHECK(t1 < t3);
+        BOOST_CHECK(t1 > t4);
+        BOOST_CHECK(t1 < t5);
+        BOOST_CHECK(t1 > t6);
+
+        BOOST_CHECK(t2 < t3);
+        BOOST_CHECK(t2 > t4);
+        BOOST_CHECK(t2 < t5);
+        BOOST_CHECK(t2 > t6);
+
+        BOOST_CHECK(t3 > t4);
+        BOOST_CHECK(t3 < t5);
+        BOOST_CHECK(t3 > t6);
+
+        BOOST_CHECK(t4 < t5);
+        BOOST_CHECK(t4 > t6);
+
+        BOOST_CHECK(t5 > t6);
     }
 
 BOOST_AUTO_TEST_SUITE_END()

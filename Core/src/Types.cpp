@@ -155,14 +155,14 @@ namespace Ternary
             throw TException();
 
         Trit t, o;
-        for (int i = 5; i > 0; --i)
+        for (int i = 5; i >= 0; --i)
         {
             t.data = (data & (0b11 << (2 * i))) >> (2 * i);
             o.data = (other.data & (0b11 << (2 * i))) >> (2 * i);
             if (t != o)
                 return t <=> o;
         }
-        return t <=> o;
+        return std::weak_ordering::equivalent;
     }
 
     std::ostream& operator<<(std::ostream& os, const Trit& trit)
