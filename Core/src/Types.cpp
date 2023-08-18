@@ -15,6 +15,7 @@ namespace Ternary
                 data = 0b01;
                 break;
             case -1:
+            case 2:
             case 'T':
                 data = 0b10;
                 break;
@@ -234,11 +235,31 @@ namespace Ternary
         return std::weak_ordering::equivalent;
     }
 
+    Tryte& Tryte::operator&=(const Tryte& other)
+    {
+        if (((data & 0b101010101010) >> 1) & (data & 0b010101010101))
+            throw TException();
+        if (((other.data & 0b101010101010) >> 1) & (other.data & 0b010101010101))
+            throw TException();
+
+        for (int i = 0; i < 6; ++i)
+        {
+            Trit t(data & (0b11 << (2 * i)) >> (2 * i));
+            Trit o(other.data & (0b11 << (2 * i)) >> (2 * i));
+            t &= o;
+            data &= ~(0b11 << (2 * i));
+            data |= t.data << (2 * i);
+        }
+        return *this;
+    }
+
+
+
+
     std::ostream& operator<<(std::ostream& os, const Trit& trit)
     { return os << trit.toString(); }
 
     std::ostream& operator<<(std::ostream& os, const Tryte& tryte)
     { return os << tryte.toString(); }
-
 
 } // namespace Ternary

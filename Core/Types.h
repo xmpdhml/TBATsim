@@ -52,6 +52,11 @@ namespace Ternary
 
         bool operator==(const Tryte& other) const
         { return operator<=>(other) == std::weak_ordering::equivalent; }
+
+        Tryte& operator&=(const Tryte& other);
+        Tryte& operator|=(const Tryte& other);
+        Tryte operator&(const Tryte& other) const;
+        Tryte operator|(const Tryte& other) const;
     };
 
     std::ostream& operator<<(std::ostream& os, const Trit& trit);
