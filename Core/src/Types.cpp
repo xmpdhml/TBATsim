@@ -101,7 +101,33 @@ namespace Ternary
         return t |= other;
     }
 
+    Trit Trit::Add(const Trit& other)
+    {
+        if (data == 0b11 || other.data == 0b11)
+            throw TException();
+        static const unsigned char table[3][3][2] = {
+            { {'0', 0}, {'0', 1}, {'0', 2}, },
+            { {'0', 1}, {'1', 2}, {'0', 0}, },
+            { {'0', 2}, {'0', 0}, {'T', 1}, },
+        };
+        const auto r = table[data][other.data];
+        data = r[1];
+        return r[0];
+    }
 
+    Trit Trit::Sub(const Trit& other)
+    {
+        if (data == 0b11 || other.data == 0b11)
+            throw TException();
+        static const unsigned char table[3][3][2] = {
+            { {'0', 0}, {'0', 2}, {'0', 1}, },
+            { {'0', 1}, {'0', 0}, {'1', 2}, },
+            { {'0', 2}, {'T', 1}, {'0', 0}, },
+        };
+        const auto r = table[data][other.data];
+        data = r[1];
+        return r[0];
+    }
 
 
     Tryte::Tryte(short tryte /* = 0 */)

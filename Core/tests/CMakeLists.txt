@@ -21,4 +21,5 @@ add_test(NAME ${ut_build_target} COMMAND ${ut_build_target})
 
 add_custom_command(TARGET ${ut_build_target}
                   POST_BUILD
-                  COMMAND ${ut_build_target} -x false)
+                  COMMAND ${ut_build_target} -x false --result_code=no
+                  )

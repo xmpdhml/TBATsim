@@ -26,12 +26,13 @@ namespace Ternary
         // tritwise operators
         Trit& operator&=(const Trit& other);
         Trit& operator|=(const Trit& other);
-        Trit& operator^=(const Trit& other);
-        
         Trit operator&(const Trit& other) const;
         Trit operator|(const Trit& other) const;
-        Trit operator^(const Trit& other) const;
-        Trit operator~() const;
+
+        // arithmetic functions
+        Trit Add(const Trit& other);
+        Trit Sub(const Trit& other);
+        Trit Mul(const Trit& other);
 
     };
 
