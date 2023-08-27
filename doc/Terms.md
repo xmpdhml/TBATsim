@@ -52,3 +52,26 @@ Unary negation (or complement) is an unary operator that inverts the value of a 
 | 0 | 0 | 0 | 1 |
 | 1 | 1 | 1 | 1 |
 
+## Addition
+
+| Carry, Result | T | 0 | 1 |
+| --------- | - | - | - |
+| T | T, 1 | 0, T | 0, 0 |
+| 0 | 0, T | 0, 0 | 0, 1 |
+| 1 | 0, 0 | 0, 1 | 1, T |
+
+## Subtraction
+
+| Borrow, Result | T | 0 | 1 |
+| --------- | - | - | - |
+| T | 0, 0 | 0, T | T, 1 |
+| 0 | 0, 1 | 0, 0 | 0, T |
+| 1 | 1, T | 0, 1 | 0, 0 |
+
+## Multiplication
+
+| Result | T | 0 | 1 |
+| --------- | - | - | - |
+| T | 1 | 0 | T |
+| 0 | 0 | 0 | 0 |
+| 1 | T | 0 | 1 |

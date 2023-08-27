@@ -6,4 +6,5 @@
     * PC (program counter)
     * SP (stack pointer)
     * General Purpose registers (A, B, C, D, E, F) (TBD)
-* 9 interrupts
+* ~~9 interrupts~~
+

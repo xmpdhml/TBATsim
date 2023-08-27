@@ -7,4 +7,4 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 # include subdirectories
 add_subdirectory(Core)
-add_subdirectory(Utilities)
+#add_subdirectory(Utilities)
