@@ -36,6 +36,7 @@ namespace Ternary
 
     };
 
+/*
     struct Tryte
     // 6-trit
     {
@@ -58,9 +59,10 @@ namespace Ternary
         Tryte operator&(const Tryte& other) const;
         Tryte operator|(const Tryte& other) const;
     };
+    */
 
     std::ostream& operator<<(std::ostream& os, const Trit& trit);
 
-    std::ostream& operator<<(std::ostream& os, const Tryte& tryte);
+    //std::ostream& operator<<(std::ostream& os, const Tryte& tryte);
 
 } // namespace Ternary
