@@ -1,5 +1,9 @@
 #include <trit.h>
 
+#include <tryte.h>
+
+#include <array>
+
 namespace Ternary
 {
     Trit::Trit(char trit)
@@ -102,32 +106,58 @@ namespace Ternary
         return t |= other;
     }
 
-    Trit Trit::Add(const Trit& other)
+    static const std::array<std::array<std::array<std::pair<unsigned char, unsigned char>, 3>, 3>, 3> trit_add_table = 
+        []() {
+            std::array<std::array<std::array<std::pair<unsigned char, unsigned char>, 3>, 3>, 3> table;
+            int v[] = {0, 1, -1};
+            for (int i = 0; i < 3; ++i)
+                for (int j = 0; j < 3; ++j)
+                    for (int k = 0; k < 3; ++k)
+                    {
+                        auto r = v[i] + v[j] + v[k];
+                        Tryte t(r);
+                        table[i][j][k] = {static_cast<unsigned char>(t.trits[0].data), static_cast<unsigned char>(t.trits[1].data)};
+                    }
+            return table;
+        }();
+
+    Trit Trit::Add(const Trit& other, const Trit& carry)
     {
         if (data == 0b11 || other.data == 0b11)
             throw TException();
-        static const unsigned char table[3][3][2] = {
-            { {'0', 0}, {'0', 1}, {'0', 2}, },
-            { {'0', 1}, {'1', 2}, {'0', 0}, },
-            { {'0', 2}, {'0', 0}, {'T', 1}, },
-        };
-        const auto r = table[data][other.data];
-        data = r[1];
-        return r[0];
+
+        const auto r = trit_add_table[data][other.data][carry.data];
+        data = r.first;
+        Trit ret;
+        ret.data = r.second;
+        return ret;
     }
 
-    Trit Trit::Sub(const Trit& other)
+    static const std::array<std::array<std::array<std::pair<unsigned char, unsigned char>, 3>, 3>, 3> trit_sub_table =
+        []() {
+            std::array<std::array<std::array<std::pair<unsigned char, unsigned char>, 3>, 3>, 3> table;
+            int v[] = {0, 1, -1};
+            for (int i = 0; i < 3; ++i)
+                for (int j = 0; j < 3; ++j)
+                    for (int k = 0; k < 3; ++k)
+                    {
+                        auto r = v[i] - v[j] + v[k];
+                        Tryte t(r);
+                        table[i][j][k] = {static_cast<unsigned char>(t.trits[0].data), static_cast<unsigned char>(t.trits[1].data)};
+                    }
+            return table;
+        }();
+
+    Trit Trit::Sub(const Trit& other, const Trit& carry)
     {
         if (data == 0b11 || other.data == 0b11)
             throw TException();
-        static const unsigned char table[3][3][2] = {
-            { {'0', 0}, {'0', 2}, {'0', 1}, },
-            { {'0', 1}, {'0', 0}, {'1', 2}, },
-            { {'0', 2}, {'T', 1}, {'0', 0}, },
-        };
-        const auto r = table[data][other.data];
-        data = r[1];
-        return r[0];
+
+        const auto r = trit_sub_table[data][other.data][carry.data];
+        data = r.first;
+        Trit ret;
+        ret.data = r.second;
+        return ret;
     }
 
     void Trit::Mul(const Trit &other)

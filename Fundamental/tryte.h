@@ -22,6 +22,10 @@ namespace Ternary
         Tryte& operator|=(const Tryte& other);
         Tryte operator&(const Tryte& other) const;
         Tryte operator|(const Tryte& other) const;
+
+        Tryte Add(const Tryte& other);
+        Tryte Sub(const Tryte& other);
+        Tryte Mul(const Tryte& other);
     };
 
 

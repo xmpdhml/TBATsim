@@ -30,8 +30,8 @@ namespace Ternary
         Trit operator|(const Trit& other) const;
 
         // arithmetic functions
-        Trit Add(const Trit& other);
-        Trit Sub(const Trit& other);
+        Trit Add(const Trit& other, const Trit& carry = Trit(0));
+        Trit Sub(const Trit& other, const Trit& carry = Trit(0));
         void Mul(const Trit& other);
 
     };

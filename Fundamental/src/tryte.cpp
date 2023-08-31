@@ -104,6 +104,25 @@ namespace Ternary
         return t;
     }
 
+    Tryte Tryte::Add(const Tryte &other)
+    {
+        Trit t;
+        for (int i = 0; i < 6; ++i)
+        {
+            t = trits[i].Add(other.trits[i]);
+        }
+    }
+
+    Tryte Tryte::Sub(const Tryte &other)
+    {
+        return Tryte();
+    }
+
+    Tryte Tryte::Mul(const Tryte &other)
+    {
+        return Tryte();
+    }
+
     std::weak_ordering Tryte::operator<=>(const Tryte& other) const
     {
         for (int i = 5; i >= 0; --i)
