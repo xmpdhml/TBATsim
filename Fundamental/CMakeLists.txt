@@ -1,6 +1,6 @@
-project(Core)
+project(Fundamental)
 
-set(current_build_target "Core")
+set(current_build_target "Fundamental")
 
 file(GLOB header_files RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} *.h *.hpp)
 file(GLOB source_files RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} src/*.h src/*.hpp src/*.cpp src/*.c)
