@@ -10,6 +10,12 @@ BOOST_AUTO_TEST_SUITE(Types_Trit)
     BOOST_AUTO_TEST_CASE(constructor)
     {
         Trit t;
+
+        Trit t2('0');
+        BOOST_CHECK_EQUAL(t2.data, 0b00);
+
+        Trit t3 = 1;
+        BOOST_CHECK_EQUAL(t3.data, 0b01);
     }
 
     BOOST_AUTO_TEST_CASE(trit_neg)

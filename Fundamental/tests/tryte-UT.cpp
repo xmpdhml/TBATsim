@@ -29,7 +29,9 @@ BOOST_AUTO_TEST_SUITE(Types_Tryte)
 
         t = -5;
         BOOST_CHECK_EQUAL(t.toString(), "T11");
-        
+
+        t = Tryte::FromString("T11");
+        BOOST_CHECK_EQUAL(t.toString(), "T11");
     }
 
     BOOST_AUTO_TEST_CASE(tryte_to_string)
