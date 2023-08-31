@@ -65,20 +65,33 @@ BOOST_AUTO_TEST_SUITE(Types_Trit)
     BOOST_AUTO_TEST_CASE(trit_add)
     {
         Trit t('T');
-        BOOST_CHECK_EQUAL(t.Add('T'), Trit('T'));
-        BOOST_CHECK_EQUAL(t, Trit('1'));
-        BOOST_CHECK_EQUAL(t.Add('T'), Trit('0'));
+        BOOST_CHECK_EQUAL(t.Add('T', 'T'), Trit('T'));
+        BOOST_CHECK_EQUAL(t, Trit('T'));
+        t = 'T';
+        BOOST_CHECK_EQUAL(t.Add('T', '0'), Trit('0'));
+        BOOST_CHECK_EQUAL(t, Trit('T'));
+        t = 'T';
+        BOOST_CHECK_EQUAL(t.Add('T', '1'), Trit('T'));
         BOOST_CHECK_EQUAL(t, Trit('0'));
-        BOOST_CHECK_EQUAL(t.Add('T'), Trit('0'));
+        t = 'T';
+        BOOST_CHECK_EQUAL(t.Add('0', 'T'), Trit('0'));
         BOOST_CHECK_EQUAL(t, Trit('T'));
-        BOOST_CHECK_EQUAL(t.Add('0'), Trit('0'));
-        BOOST_CHECK_EQUAL(t, Trit('T'));
-        BOOST_CHECK_EQUAL(t.Add('1'), Trit('0'));
+        t = 'T';
+        BOOST_CHECK_EQUAL(t.Add('0', '0'), Trit('T'));
         BOOST_CHECK_EQUAL(t, Trit('0'));
-        BOOST_CHECK_EQUAL(t.Add('1'), Trit('0'));
-        BOOST_CHECK_EQUAL(t, Trit('1'));
-        BOOST_CHECK_EQUAL(t.Add('1'), Trit('1'));
-        BOOST_CHECK_EQUAL(t, Trit('T'));
+        t = 'T';
+        BOOST_CHECK_EQUAL(t.Add('0', '1'), Trit('0'));
+        BOOST_CHECK_EQUAL(t, Trit('0'));
+        t = 'T';
+        BOOST_CHECK_EQUAL(t.Add('1', 'T'), Trit('T'));
+        BOOST_CHECK_EQUAL(t, Trit('0'));
+        t = 'T';
+        BOOST_CHECK_EQUAL(t.Add('1', '0'), Trit('0'));
+        BOOST_CHECK_EQUAL(t, Trit('0'));
+        t = 'T';
+        BOOST_CHECK_EQUAL(t.Add('1', '1'), Trit('1'));
+        BOOST_CHECK_EQUAL(t, Trit('0'));
+        t = '0';
     }
 
     BOOST_AUTO_TEST_CASE(trit_sub)
