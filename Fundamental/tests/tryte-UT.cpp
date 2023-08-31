@@ -117,10 +117,24 @@ BOOST_AUTO_TEST_SUITE(Types_Tryte)
         BOOST_CHECK(t5 > t6);
     }
 
-    BOOST_AUTO_TEST_CASE(tryte_and)
+    BOOST_AUTO_TEST_CASE(tryte_and_or)
     {
         Tryte t1(1), t2(-1), t3(2), t4(-2), t5(3), t6(-3);
-        
+        BOOST_CHECK_EQUAL(t1 & t2, Tryte::FromString("T"));
+        BOOST_CHECK_EQUAL(t1 & t3, Tryte::FromString("T"));
+        BOOST_CHECK_EQUAL(t1 & t4, Tryte::FromString("T1"));
+        BOOST_CHECK_EQUAL(t1 | t5, Tryte::FromString("11"));
+        BOOST_CHECK_EQUAL(t1 | t6, Tryte::FromString("1"));
+    }
+
+    BOOST_AUTO_TEST_CASE(tryte_add)
+    {
+        Tryte t1(1), t2(-1), t3(2), t4(-2), t5(3), t6(-3);
+        BOOST_CHECK_EQUAL(t1 + t2, Tryte::FromString("0"));
+        BOOST_CHECK_EQUAL(t1 + t3, Tryte::FromString("10"));
+        BOOST_CHECK_EQUAL(t1 + t4, Tryte::FromString("T"));
+        BOOST_CHECK_EQUAL(t1 + t5, Tryte::FromString("11"));
+        BOOST_CHECK_EQUAL(t1 + t6, Tryte::FromString("T1"));
     }
 
 BOOST_AUTO_TEST_SUITE_END()

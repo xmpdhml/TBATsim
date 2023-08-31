@@ -138,6 +138,20 @@ namespace Ternary
         return t;
     }
 
+    Tryte Tryte::operator+(const Tryte &other) const
+    {
+        Tryte r(*this);
+        r.Add(other);
+        return r;
+    }
+
+    Tryte Tryte::operator-(const Tryte &other) const
+    {
+        Tryte r(*this);
+        r.Sub(other);
+        return r;
+    }
+
     Trit Tryte::Add(const Tryte &other)
     {
         Trit t;
