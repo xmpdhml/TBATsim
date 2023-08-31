@@ -38,4 +38,6 @@ namespace Ternary
 
     std::ostream& operator<<(std::ostream& os, const Trit& trit);
 
+    Trit operator""_T(char trit);
+
 } // namespace Ternary

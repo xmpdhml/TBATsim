@@ -175,4 +175,7 @@ namespace Ternary
     std::ostream& operator<<(std::ostream& os, const Trit& trit)
     { return os << trit.toString(); }
 
+    Trit operator""_T(char trit)
+    { return Trit(trit); }
+
 } // namespace Ternary

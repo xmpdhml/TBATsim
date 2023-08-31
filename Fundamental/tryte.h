@@ -9,6 +9,8 @@ namespace Ternary
         Trit trits[6];
         
         Tryte(short tryte = 0);
+
+        Tryte(const char* trits, std::size_t size);
         
         std::string toString() const;
         
@@ -23,12 +25,14 @@ namespace Ternary
         Tryte operator&(const Tryte& other) const;
         Tryte operator|(const Tryte& other) const;
 
-        Tryte Add(const Tryte& other);
-        Tryte Sub(const Tryte& other);
+        Trit Add(const Tryte& other);
+        Trit Sub(const Tryte& other);
         Tryte Mul(const Tryte& other);
     };
 
 
     std::ostream& operator<<(std::ostream& os, const Tryte& tryte);
+
+    Tryte operator""_T(const char* trits, std::size_t size);
     
 } // namespace Ternary

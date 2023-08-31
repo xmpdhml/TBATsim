@@ -37,6 +37,36 @@ namespace Ternary
         }
     }
 
+    Tryte::Tryte(const char *trits, std::size_t size)
+    {
+        if (size > 6)
+            throw TException();
+        for (int i = 0; i < 6; ++i)
+        {
+            if (i < size)
+            {
+                switch (trits[i])
+                {
+                case '0':
+                    this->trits[i].data = 0;
+                    break;
+                case '1':
+                    this->trits[i].data = 1;
+                    break;
+                case 'T':
+                    this->trits[i].data = 2;
+                    break;
+                default:
+                    throw TException();
+                }
+            }
+            else
+            {
+                this->trits[i].data = 0;
+            }            
+        }
+    }
+
     std::string Tryte::toString() const
     {
         char s[7];
@@ -104,18 +134,24 @@ namespace Ternary
         return t;
     }
 
-    Tryte Tryte::Add(const Tryte &other)
+    Trit Tryte::Add(const Tryte &other)
     {
         Trit t;
         for (int i = 0; i < 6; ++i)
         {
-            t = trits[i].Add(other.trits[i]);
+            t = trits[i].Add(other.trits[i], t);
         }
+        return t;
     }
 
-    Tryte Tryte::Sub(const Tryte &other)
+    Trit Tryte::Sub(const Tryte &other)
     {
-        return Tryte();
+        Trit t;
+        for (int i = 0; i < 6; ++i)
+        {
+            t = trits[i].Sub(other.trits[i], t);
+        }
+        return t;
     }
 
     Tryte Tryte::Mul(const Tryte &other)
@@ -138,4 +174,10 @@ namespace Ternary
     {
         return os << tryte.toString();
     }
+
+    Tryte operator""_T(const char* trits, std::size_t size)
+    {
+        return Tryte(trits, size);
+    }
+
 } // namespace Ternar
