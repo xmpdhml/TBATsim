@@ -100,4 +100,35 @@ BOOST_AUTO_TEST_SUITE(Types_Trit)
         BOOST_CHECK_EQUAL(t, Trit('T'));
     }
 
+    BOOST_AUTO_TEST_CASE(trit_mul)
+    {
+        Trit t('T');
+        t.Mul('T');
+        BOOST_CHECK_EQUAL(t, Trit('1'));
+        t = 'T';
+        t.Mul('0');
+        BOOST_CHECK_EQUAL(t, Trit('0'));
+        t = 'T';
+        t.Mul('1');
+        BOOST_CHECK_EQUAL(t, Trit('T'));
+        t = '0';
+        t.Mul('T');
+        BOOST_CHECK_EQUAL(t, Trit('0'));
+        t = '0';
+        t.Mul('0');
+        BOOST_CHECK_EQUAL(t, Trit('0'));
+        t = '0';
+        t.Mul('1');
+        BOOST_CHECK_EQUAL(t, Trit('0'));
+        t = '1';
+        t.Mul('T');
+        BOOST_CHECK_EQUAL(t, Trit('T'));
+        t = '1';
+        t.Mul('0');
+        BOOST_CHECK_EQUAL(t, Trit('0'));
+        t = '1';
+        t.Mul('1');
+        BOOST_CHECK_EQUAL(t, Trit('1'));
+    }
+
 BOOST_AUTO_TEST_SUITE_END()

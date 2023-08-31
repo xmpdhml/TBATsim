@@ -115,4 +115,10 @@ BOOST_AUTO_TEST_SUITE(Types_Tryte)
         BOOST_CHECK(t5 > t6);
     }
 
+    BOOST_AUTO_TEST_CASE(tryte_and)
+    {
+        Tryte t1(1), t2(-1), t3(2), t4(-2), t5(3), t6(-3);
+        
+    }
+
 BOOST_AUTO_TEST_SUITE_END()

@@ -130,6 +130,18 @@ namespace Ternary
         return r[0];
     }
 
+    void Trit::Mul(const Trit &other)
+    {
+        if (data == 0b11 || other.data == 0b11)
+            throw TException();
+        static const unsigned char table[3][3] = {
+            {0, 0, 0},
+            {0, 1, 2},
+            {0, 2, 1},
+        };
+        data = table[data][other.data];
+    }
+
     std::ostream& operator<<(std::ostream& os, const Trit& trit)
     { return os << trit.toString(); }
 
